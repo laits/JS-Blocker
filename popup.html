@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title id="pageTitle">JS Blocker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section>
+      <div id="domain" class="site-info" role="status" aria-live="polite"></div>
+      <div id="status" class="site-status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section>
+      <div class="action-buttons" role="group" aria-label="Действия для текущего сайта">
+        <button type="button" id="toggleBtn"></button>
+        <button type="button" id="clearAllBtn" class="danger"></button>
+      </div>
+    </section>
+
+    <h2 id="blockedSitesHeader"></h2>
+    <section>
+      <div class="import-export" role="group" aria-label="Импорт и экспорт">
+        <button type="button" id="exportBtn" class="allow full-width"></button>
+        <button type="button" id="importBtn" class="danger full-width"></button>
+        <input type="file" id="importFile" accept=".json" style="display:none" aria-hidden="true" />
+      </div>
+    </section>
+
+    <h2 id="searchHeader"></h2>
+    <section>
+      <div class="controls" role="group" aria-label="Управление списком">
+        <label for="searchInput" class="visually-hidden" id="searchLabel"></label>
+        <input type="text" id="searchInput" placeholder="" class="full-width" aria-describedby="searchHelp">
+        <span id="searchHelp" class="visually-hidden"></span>
+        <button type="button" id="sortBtn" class="full-width"></button>
+      </div>
+    </section>
+
+    <ul id="blockedList" role="list" aria-labelledby="blockedSitesHeader"></ul>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

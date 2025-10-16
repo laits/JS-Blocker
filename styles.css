@@ -1,0 +1,588 @@
+/* ============================= */
+/* ========== Reset ============ */
+/* ============================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* ============================= */
+/* ======= Base Layout ========== */
+/* ============================= */
+
+body {
+  font-family: sans-serif;
+  padding: 10px;
+  min-width: 350px;
+  max-width: 400px;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#domain,
+#status {
+  margin-bottom: 10px;
+}
+
+#blockedList {
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+#blockedList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#blockedList::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 3px;
+}
+
+/* Название сайта — внутренние страницы */
+#internal-page-message 
+{
+  padding: 9px;
+  color: rgb(70 70 70 / 92%);
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Название сайта — нейтральный блок */
+.site-info {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Статус JS — динамичный блок */
+.site-status {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Цветовая индикация */
+.site-status.blocked {
+  background-color: #ffe5e5;
+  color: #c00;
+}
+
+.site-status.allowed {
+  background-color: #e5ffe5;
+  color: #080;
+}
+
+/* Сообщение список */
+.empty {
+  padding: 8px 12px;
+  color: rgb(0 0 0 / 66%);
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* Анимации */
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Применение анимаций */
+.site-status.fade-in,
+.toast.fade-in {
+  animation: fadeInSlide 0.3s ease;
+}
+
+li.fade-in {
+  animation: fadeInPop 0.3s ease;
+}
+
+li.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Отключение анимации при prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================= */
+/* ======= Accessibility ======== */
+/* ============================= */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ============================= */
+/* ========= Inputs ============= */
+/* ============================= */
+
+#searchInput {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+  height: 40px;
+  min-width: 0;
+  flex: 1;
+}
+
+#searchInput:focus-visible {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+  transition: outline 0.2s ease;
+}
+
+/* ============================= */
+/* ======= Flex Containers ====== */
+/* ============================= */
+
+.controls,
+.action-buttons,
+.import-export {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.controls input,
+.controls button,
+.action-buttons button,
+.import-export button {
+  flex: 1;
+}
+
+/* ============================= */
+/* ========= Buttons ============ */
+/* ============================= */
+
+button {
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #eee;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:focus-visible {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.allow {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+button.allow:hover {
+  background-color: #2c9858;
+}
+
+button.block {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+button.block:hover {
+  background-color: #c0392b;
+}
+
+button.allow,
+button.block {
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button.allow:active,
+button.block:active,
+button#clearAllBtn:active,
+li button.danger:active {
+  transform: scale(0.98);
+}
+
+button.danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+button.danger:hover {
+  background-color: #f5c6cb;
+}
+
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#clearAllBtn {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+#clearAllBtn:hover {
+  background-color: #f5c6cb;
+}
+
+#sortBtn {
+  background-color: #d5e8f6;
+  color: #1c3f5e;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#sortBtn:hover {
+  background-color: #c0dbf0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sortBtn:active {
+  transform: scale(0.98);
+}
+
+#sortBtn:focus-visible {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+}
+
+/* ============================= */
+/* ======== List Items ========== */
+/* ============================= */
+
+li {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 6px 0 6px 6px;
+  word-break: break-word;
+  min-height: 32px;
+  background-color: #dff0d8;
+  border-left: 4px solid #e74c3c;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+li span:hover {
+    background-color: #c8e7bb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+li button {
+  margin-left: 10px;
+  padding: 4px 8px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+li button.danger {
+  background-color: #e74c3c;
+  color: #fff;
+  margin-right: 7px;
+}
+
+li button:focus-visible {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+}
+
+li.current-domain span {
+  background-color: #dff0d8;
+  border-left: 4px solid #27ae60;
+  padding-left: 6px;
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+li.current-domain {
+  background-clip: padding-box;
+}
+
+li span strong {
+  background-color: #ffeeba;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ============================= */
+/* ========= Toast ============== */
+/* ============================= */
+
+@keyframes toastFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.toast.fade-in {
+  opacity: 1;
+}
+
+.toast.fade-out {
+  opacity: 0;
+}
+
+/* ============================= */
+/* ========= Dark Theme ========= */
+/* ============================= */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: #ccc;
+  }
+
+  button {
+    background-color: #333;
+    color: #ccc;
+  }
+
+  button.allow {
+    background-color: #2ecc71;
+    color: #fff;
+  }
+
+  button.block {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+
+  li button {
+    background-color: #444;
+    color: #f0f0f0;
+  }
+
+  #sortBtn {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+  }
+
+  #sortBtn:hover {
+    background-color: #34495e;
+  }
+
+  #blockedList::-webkit-scrollbar-thumb {
+    background-color: #555;
+  }
+
+  li.current-domain span {
+    background-color: #2e3b2f;
+    border-left: 4px solid #2ecc71;
+    color: #d0ffd0;
+    transition: background-color 0.3s ease, border-left 0.3s ease, color 0.3s ease;
+  }
+
+  li span strong {
+    background-color: #5c4b1e;
+    color: #fff;
+  }
+  
+  li span {
+    background-color: #2d2d2d;
+  }
+  
+  li span:hover {
+    background-color: #181818;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+ 
+  #searchInput {
+   background-color: rgb(34 34 34 / 55%);
+  }
+  
+  #internal-page-message {
+    color: #c2c1c1;
+    background-color: #282828;
+    border: none;
+  }
+
+  .site-info {
+    background-color: #2a2a2a;
+    color: #ccc;
+  }
+
+  .site-status.blocked {
+    background-color: #5c1e1e;
+    color: #ff9999;
+  }
+
+  .site-status.allowed {
+    background-color: #1e5c2e;
+    color: #aaffaa;
+  }
+
+  .empty {
+    color: #c2c1c1;
+    background-color: #282828;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .toast {
+    background-color: #222;
+    color: #eee;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ============================= */
+/* ======= Mobile Adaptation ==== */
+/* ============================= */
+
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
+  .controls,
+  .action-buttons,
+  .import-export {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .controls input,
+  .controls button,
+  .action-buttons button,
+  .import-export button {
+    flex: 1;
+    margin-bottom: 6px;
+  }
+
+  #searchInput,
+  #sortBtn {
+    width: 100%;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: stretch;
+    display: flex;
+    margin-bottom: 8px;
+  }
+
+  li span {
+    width: 100%;
+    margin-bottom: 6px;
+    word-break: break-word;
+    background-color: #31363e;
+  }
+
+  li button {
+    align-self: flex-end;
+  }
+}
