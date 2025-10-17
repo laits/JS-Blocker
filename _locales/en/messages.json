@@ -1,0 +1,16 @@
+{
+  "extension_name": {
+    "message": "JS-Blocker"
+  },
+  "extension_description": {
+    "message": "Disables JavaScript on selected sites"
+  },
+  "menu_block_js": {
+    "message": "🔒 Block JS on this site",
+    "description": "Context menu item to block JS"
+  },
+  "menu_allow_js": {
+    "message": "🔓 Allow JS on this site",
+    "description": "Context menu item to allow JS"
+  }
+}
