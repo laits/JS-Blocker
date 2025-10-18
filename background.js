@@ -263,7 +263,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   chrome.contextMenus.create({
     id: 'block-js',
     title: chrome.i18n.getMessage('menu_block_js') || 'Отключить JS на этом сайте',
-    contexts: ['page']
+    contexts: ['page'],
+    documentUrlPatterns: ['http://*/*', 'https://*/*']
   });
 });
 
